@@ -61,7 +61,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/publishedAt"
+                android:id="@+id/publishedAtDate"
                 style="@style/Gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
         </LinearLayout>
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/article_title"
                 style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_8"
-                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/article_title"
                 tools:text="Article Description" />
 
             <LinearLayout
@@ -97,7 +97,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/time"
+                    android:id="@+id/publishedAgoTime"
                     style="@style/Gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
