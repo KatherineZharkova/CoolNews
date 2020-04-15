@@ -25,7 +25,6 @@ import ru.cocovella.coolnews.ui.image.GlideImageLoader
 class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
     companion object {
-        private const val PICK_IMAGE_REQUEST_ID = 1
         fun newInstance() = RepositoriesFragment()
     }
 
