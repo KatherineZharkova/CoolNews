@@ -63,6 +63,9 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.24'
     kapt 'com.google.dagger:dagger-compiler:2.24'
+
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
