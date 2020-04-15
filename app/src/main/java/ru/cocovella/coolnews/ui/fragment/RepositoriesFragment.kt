@@ -11,7 +11,7 @@ import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
-import ru.cocovella.coolnews.mvp.model.api.ApiHolder
+import ru.cocovella.coolnews.mvp.model.api.GitApiHolder
 import ru.cocovella.coolnews.mvp.model.repo.GithubRepositoriesRepo
 import ru.cocovella.coolnews.mvp.model.repo.GithubUsersRepo
 import ru.cocovella.coolnews.mvp.presenter.RepositoriesPresenter
@@ -44,7 +44,7 @@ class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButto
         AndroidSchedulers.mainThread(),
         App.instance.router,
         GithubRepositoriesRepo(),
-        GithubUsersRepo(ApiHolder.api)
+        GithubUsersRepo(GitApiHolder.api)
     )
 
 
