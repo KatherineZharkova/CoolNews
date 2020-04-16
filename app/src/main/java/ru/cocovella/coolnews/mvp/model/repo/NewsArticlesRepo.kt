@@ -3,7 +3,6 @@ package ru.cocovella.coolnews.mvp.model.repo
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.cocovella.coolnews.mvp.model.entity.Article
-import ru.cocovella.coolnews.mvp.model.entity.GithubRepository
 import ru.cocovella.coolnews.mvp.model.entity.Source
 
 class NewsArticlesRepo {

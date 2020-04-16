@@ -54,7 +54,7 @@ class HeadlinesPresenter (
     }
 
     fun loadHeadlines() {
-        headlinesRepo.getHeadlines("rt")
+        headlinesRepo.getHeadlines("rbc")
             .observeOn(mainThreadScheduler)
             .subscribe({headlines ->
                 viewState.setHeader(

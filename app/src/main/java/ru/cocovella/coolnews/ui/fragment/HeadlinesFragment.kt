@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_headlines.*
-import kotlinx.android.synthetic.main.fragment_repositories.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -20,7 +19,6 @@ import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
 import ru.cocovella.coolnews.ui.adapter.HeadlinesRVAdapter
-import ru.cocovella.coolnews.ui.adapter.RepositoriesRVAdapter
 import ru.cocovella.coolnews.ui.image.GlideImageLoader
 
 class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListener {
