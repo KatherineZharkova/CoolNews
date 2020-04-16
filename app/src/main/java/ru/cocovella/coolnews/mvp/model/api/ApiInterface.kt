@@ -11,7 +11,7 @@ interface ApiInterface {
 
     @GET("/top-headlines")
     fun getHeadlines(
-        @Query("sources") sourceId: String? = "ru",
+        @Query("sources") sourceId: String? = "rbc,tr,lenta,google-news-ru",
         @Query("apiKey") apiKey: String? = "520802e1bb5b4ac1b94aa5927bcf1b00"
     ): Single<List<Headlines>>
 

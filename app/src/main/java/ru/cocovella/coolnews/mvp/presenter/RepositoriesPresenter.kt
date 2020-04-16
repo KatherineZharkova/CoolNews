@@ -41,9 +41,7 @@ class RepositoriesPresenter(
         super.onFirstViewAttach()
         viewState.init()
         loadUser()
-
         loadRepos()
-
         repositoryListPresenter.itemClickListener = { itemView ->
             val repository = repositoryListPresenter.repositories[itemView.pos]
             router.navigateTo(Screens.RepositoryScreen(repository))
@@ -77,6 +75,5 @@ class RepositoriesPresenter(
         router.exit()
         return true
     }
-
 
 }

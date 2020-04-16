@@ -1,10 +1,12 @@
 package ru.cocovella.coolnews.mvp.view
 
-import ru.cocovella.coolnews.mvp.model.entity.Article
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 
-interface HeadlinesView {
+@StateStrategyType(AddToEndSingleStrategy::class)
+interface HeadlinesView : MvpView {
     fun init()
-    fun showStatus(status:String)
-    fun setTotalResult(totalResult:String)
-    fun setArticlesRV(articles:List<Article>)
+    fun setHeader(text: String)
+    fun updateList()
 }

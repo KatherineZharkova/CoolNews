@@ -8,7 +8,6 @@ import moxy.viewstate.strategy.StateStrategyType
 interface RepositoriesView : MvpView {
     fun init()
     fun updateList()
-
     fun setUsername(text: String)
     fun loadAvatar(avatarUrl: String)
 

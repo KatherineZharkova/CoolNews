@@ -24,20 +24,14 @@ import ru.cocovella.coolnews.ui.image.GlideImageLoader
 
 class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
-    companion object {
-        fun newInstance() = RepositoriesFragment()
-    }
+    companion object { fun newInstance() = RepositoriesFragment() }
 
-    @InjectPresenter
-    lateinit var presenter: RepositoriesPresenter
-
+    @InjectPresenter lateinit var presenter: RepositoriesPresenter
     val imageLoader = GlideImageLoader()
-
     var adapter: RepositoriesRVAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         View.inflate(context, R.layout.fragment_repositories, null)
-
 
     @ProvidePresenter
     fun providePresenter() = RepositoriesPresenter(
@@ -47,12 +41,10 @@ class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButto
         GithubUsersRepo(GitApiHolder.api)
     )
 
-
     override fun init() {
         rv_repos.layoutManager = LinearLayoutManager(context)
         adapter = RepositoriesRVAdapter(presenter.repositoryListPresenter)
         rv_repos.adapter = adapter
-
     }
 
     override fun updateList() {

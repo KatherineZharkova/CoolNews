@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NewsApiHolder {
 
-    val api : IDataSource by lazy {
+    val api : ApiInterface by lazy {
 
         val gson = GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -16,11 +16,11 @@ object NewsApiHolder {
             .create()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://newsapi.org/v2")
+            .baseUrl("https://newsapi.org/v2/")
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
-        retrofit.create(IDataSource::class.java)
+        retrofit.create(ApiInterface::class.java)
     }
 }

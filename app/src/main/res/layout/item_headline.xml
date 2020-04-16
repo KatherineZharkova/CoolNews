@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/headline_background"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:src="@drawable/bottom_shadow"
-            app:layout_constraintBottom_toBottomOf="@id/img"
+            app:layout_constraintBottom_toBottomOf="@id/headline_background"
             tools:ignore="ContentDescription" />
 
         <TextView
