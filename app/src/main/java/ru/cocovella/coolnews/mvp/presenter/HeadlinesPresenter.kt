@@ -17,13 +17,14 @@ import javax.inject.Inject
 class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val sourcesId: String) : MvpPresenter<HeadlinesView>() {
 
     class HeadlinesRVPresenter : IHeadlinesRVPresenter {
+        val dateFormatter = DateFormatter()
+
         val list = mutableListOf<Article>()
         override var itemClickListener: ((HeadlinesItemView) -> Unit)? = null
 
         override fun getCount() = list.size
 
         override fun bindView(view: HeadlinesItemView) {
-            val dateFormatter = DateFormatter()
             val article = list[view.pos]
             with(view) {
                 setImage(article.urlToImage+"")
