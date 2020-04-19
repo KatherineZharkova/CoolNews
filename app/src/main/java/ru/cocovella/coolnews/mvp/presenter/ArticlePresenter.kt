@@ -11,6 +11,7 @@ import javax.inject.Inject
 class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>() {
 
     @Inject lateinit var router: Router
+    private val dateFormatter = DateFormatter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -19,7 +20,7 @@ class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>
             setAppbarTitle(article.source.name)
             setAppbarSubtitle(article.url)
             setImage(article.urlToImage)
-            setPublishedAt(DateFormatter().formatDate(article.publishedAt) ?: "")
+            setPublishedAt(dateFormatter.formatDate(article.publishedAt) ?: "")
             setArticleTitle(article.title)
             setSourceAuthorTime()
             setWebView(article.url)
@@ -28,7 +29,7 @@ class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>
     }
 
     private fun setSourceAuthorTime() {
-        val text = DateFormatter().formatDateToTime(article.publishedAt) + " • " + article.author
+        val text = dateFormatter.formatDateToTime(article.publishedAt) + " • " + article.author
         viewState.setSourceAuthorTime(text)
     }
 

@@ -23,14 +23,15 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
         override fun getCount() = list.size
 
         override fun bindView(view: HeadlinesItemView) {
+            val dateFormatter = DateFormatter()
             val article = list[view.pos]
             with(view) {
                 setImage(article.urlToImage+"")
                 setArticleTitle(article.title+"")
                 setDescription(article.description+"")
                 setSource(article.author+"")
-                setPublishedAtDate(DateFormatter().formatDate(article.publishedAt) ?: "")
-                setPublishedAgoTime(DateFormatter().formatDateToTime(article.publishedAt) + " • ")
+                setPublishedAtDate(dateFormatter.formatDate(article.publishedAt) ?: "")
+                setPublishedAgoTime(dateFormatter.formatDateToTime(article.publishedAt) + " • ")
             }
         }
     }
