@@ -9,13 +9,10 @@ import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 
 class GlideImageLoader : IImageLoader<ImageView> {
     override fun loadInto(url: String, container: ImageView) {
-        val requestOptions = RequestOptions()
                     Glide.with(container.context)
-//                        .asBitmap()
                         .load(url)
-                        .apply(requestOptions)
+                        .apply(RequestOptions())
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(container)
     }
-
 }

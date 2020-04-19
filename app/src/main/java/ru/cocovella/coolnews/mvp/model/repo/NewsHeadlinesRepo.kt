@@ -7,7 +7,6 @@ import ru.cocovella.coolnews.mvp.model.api.IDataSource
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.network.NetworkStatus
-import timber.log.Timber
 
 class NewsHeadlinesRepo(
     val api: IDataSource,
@@ -20,7 +19,6 @@ class NewsHeadlinesRepo(
             if (isOnline) {
                 api.getNewsHeadlines(sourceId).flatMap {
                     val headline = Headlines(it.articles[0].source.id, it.status, it.totalResult, it.articles)
-                    Timber.e("api.getNewsHeadlines(${sourceId}) => totalResult: ${it.totalResult}; Articles count: ${it.articles.size}")
                     cache.putNewsHeadlines(headline).toSingleDefault(headline)
                 }
             } else {

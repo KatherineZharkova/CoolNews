@@ -29,10 +29,8 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
                 setArticleTitle(article.title+"")
                 setDescription(article.description+"")
                 setSource(article.author+"")
-                setPublishedAtDate(
-                    DateFormatter().formatDate(article.publishedAt) ?: "")
-                setPublishedAgoTime(
-                    DateFormatter().formatDateToTime(article.publishedAt) + " • ")
+                setPublishedAtDate(DateFormatter().formatDate(article.publishedAt) ?: "")
+                setPublishedAgoTime(DateFormatter().formatDateToTime(article.publishedAt) + " • ")
             }
         }
     }
@@ -60,10 +58,7 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
                 presenter.list.addAll(it.articles)
                 viewState.setHeader("Top Headlines  • " +  it.articles[0].source.name)
                 viewState.updateList()
-                Timber.e("Article : ${it.articles[0]}")
-            }, {
-                Timber.e(it)
-            })
+            }, { Timber.e(it) })
     }
 
     fun backClicked(): Boolean {

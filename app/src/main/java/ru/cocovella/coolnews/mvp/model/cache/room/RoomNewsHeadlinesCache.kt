@@ -1,10 +1,12 @@
 package ru.cocovella.coolnews.mvp.model.cache.room
 
+import android.widget.Toast
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
+import ru.cocovella.coolnews.mvp.model.entity.Article
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.entity.room.RoomHeadlines
 import ru.cocovella.coolnews.mvp.model.entity.room.db.Database
@@ -14,7 +16,9 @@ class RoomNewsHeadlinesCache(val database: Database) : INewsHeadlinesCache {
     override fun getNewsHeadlines(sourceId: String): @NonNull Single<Headlines> = Single.fromCallable {
         database.headlinesDao.findHeadlines(sourceId)?.run {
             Headlines(sourceId, status, totalResult, articlesList) }
-            ?: throw RuntimeException("No such headline in cache")
+            ?: run {
+                throw RuntimeException("No such headline in cache")
+            }
     }.subscribeOn(Schedulers.io())
 
 

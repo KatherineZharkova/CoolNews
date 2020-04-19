@@ -12,7 +12,6 @@ import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
-import ru.cocovella.coolnews.mvp.model.entity.Sources
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.PublishersPresenter
 import ru.cocovella.coolnews.mvp.view.PublishersView
@@ -32,7 +31,7 @@ class PublishersFragment : MvpAppCompatFragment(), PublishersView, BackButtonLis
 
     @Inject lateinit var imageLoader: IImageLoader<ImageView>
 
-    var adapter: PublishersRVAdapter? = null
+    private var adapter: PublishersRVAdapter? = null
 
     private val component = App.instance.headlinesSubcomponent
 

@@ -11,6 +11,4 @@ data class Source (
     @Expose val id: String,
     @SerializedName("name")
     @Expose val name: String
-) : Parcelable {
-
-}
+) : Parcelable
