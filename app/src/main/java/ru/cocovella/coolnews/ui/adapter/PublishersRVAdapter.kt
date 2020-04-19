@@ -3,15 +3,12 @@ package ru.cocovella.coolnews.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_publisher.view.*
 import ru.cocovella.coolnews.R
-import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.list.IPublishersRVPresenter
 import ru.cocovella.coolnews.mvp.view.list.PublishersItemView
-import javax.inject.Inject
 
 class PublishersRVAdapter(val presenter: IPublishersRVPresenter) : RecyclerView.Adapter<PublishersRVAdapter.ViewHolder>() {
 
@@ -30,10 +27,11 @@ class PublishersRVAdapter(val presenter: IPublishersRVPresenter) : RecyclerView.
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer, PublishersItemView {
         override var pos = -1
 
-        override fun setTitle(text: String) = with(containerView) {
-            tv_title.text = text
-        }
+        override fun setTitle(text: String) = with(containerView) { name.text = text }
 
+        override fun setUrl(text: String)  = with(containerView) { url.text = text }
+
+        override fun setDescription(text: String) = with(containerView)  { description.text = text }
 
     }
 

@@ -26,6 +26,8 @@ class PublishersPresenter(private val mainThreadScheduler: Scheduler) : MvpPrese
         override fun bindView(view: PublishersItemView) {
             val sources = list[view.pos]
             view.setTitle(sources.name)
+            view.setUrl(sources.url)
+            view.setDescription(sources.description)
         }
     }
 
