@@ -1,5 +1,7 @@
 package ru.cocovella.coolnews.mvp.model.repo
 
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.cocovella.coolnews.mvp.model.api.IDataSource
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
@@ -13,13 +15,12 @@ class NewsHeadlinesRepo(
     val cache: INewsHeadlinesCache
 ) {
 
-    fun getNewsHeadlines(sourceId: String)  =
+    fun getNewsHeadlines(sourceId: String): @NonNull Single<Headlines> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
                 api.getNewsHeadlines(sourceId).flatMap {
-                    val headline = Headlines(it.articles[0].source.id, it.status, it.articles)
-                    Timber.e("api.getNewsHeadlines(${sourceId}) => STATUS: ${it.status}; Articles count: ${it.articles.size}")
-
+                    val headline = Headlines(it.articles[0].source.id, it.status, it.totalResult, it.articles)
+                    Timber.e("api.getNewsHeadlines(${sourceId}) => totalResult: ${it.totalResult}; Articles count: ${it.articles.size}")
                     cache.putNewsHeadlines(headline).toSingleDefault(headline)
                 }
             } else {

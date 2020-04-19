@@ -4,7 +4,6 @@ import io.reactivex.rxjava3.core.Scheduler
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.cocovella.coolnews.mvp.model.entity.Article
-import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.repo.NewsHeadlinesRepo
 import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesRVPresenter
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
@@ -15,8 +14,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
-class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val headlines: Headlines) :
-    MvpPresenter<HeadlinesView>() {
+class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val sourcesId: String) : MvpPresenter<HeadlinesView>() {
 
     class HeadlinesRVPresenter : IHeadlinesRVPresenter {
         val list = mutableListOf<Article>()
@@ -27,11 +25,11 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
         override fun bindView(view: HeadlinesItemView) {
             val article = list[view.pos]
             with(view) {
-                setImage(article.urlToImage)
-                setAuthor(article.author)
-                setArticleTitle(article.title)
-                setDescription(article.description)
-                setSource(article.source.name)
+                setImage(article.urlToImage+"")
+                setAuthor(article.author+"")
+                setArticleTitle(article.title+"")
+                setDescription(article.description+"")
+                setSource(article.source.name+"")
                 setPublishedAtDate(DateFormatter().formatDate(article.publishedAt) ?: "")
                 setPublishedAgoTime(DateFormatter().formatDateToTime(article.publishedAt) + " • ")
             }
@@ -40,15 +38,11 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
 
     @Inject lateinit var headlinesRepo: NewsHeadlinesRepo
     @Inject lateinit var router: Router
-
     val presenter = HeadlinesRVPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-
-        viewState.setHeader(headlines.sourceId)
-
         loadData()
 
         presenter.itemClickListener = {
@@ -58,13 +52,14 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
     }
 
     private fun loadData() {
-        headlinesRepo.getNewsHeadlines(headlines.sourceId)
+        headlinesRepo.getNewsHeadlines(sourcesId)
             .observeOn(mainThreadScheduler)
             .subscribe({
                 presenter.list.clear()
                 presenter.list.addAll(it.articles)
                 viewState.setHeader("Top Headlines  • " +  it.articles[0].source.name)
                 viewState.updateList()
+                Timber.e("Article : ${it.articles[0]}")
             }, {
                 Timber.e(it)
             })
@@ -74,6 +69,5 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
         router.exit()
         return true
     }
-
 
 }

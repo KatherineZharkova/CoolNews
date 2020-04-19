@@ -9,5 +9,6 @@ data class RoomHeadlines(
     @PrimaryKey
     var sourceId: String,
     var status: String,
+    var totalResult: Int,
     var articlesList: List<Article>
 )

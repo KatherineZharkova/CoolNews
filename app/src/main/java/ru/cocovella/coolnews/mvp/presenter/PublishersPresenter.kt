@@ -4,7 +4,6 @@ import io.reactivex.rxjava3.core.Scheduler
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.cocovella.coolnews.mvp.model.entity.Sources
-import ru.cocovella.coolnews.mvp.model.repo.NewsHeadlinesRepo
 import ru.cocovella.coolnews.mvp.model.repo.NewsPublishersRepo
 import ru.cocovella.coolnews.mvp.presenter.list.IPublishersRVPresenter
 import ru.cocovella.coolnews.mvp.view.PublishersView
@@ -32,10 +31,8 @@ class PublishersPresenter(private val mainThreadScheduler: Scheduler) : MvpPrese
     }
 
     @Inject lateinit var publishersRepo: NewsPublishersRepo
-    @Inject lateinit var headlinesRepo: NewsHeadlinesRepo
     @Inject lateinit var router: Router
     val presenter = PublishersRVPresenter()
-
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -43,7 +40,7 @@ class PublishersPresenter(private val mainThreadScheduler: Scheduler) : MvpPrese
         loadData()
 
         presenter.itemClickListener = {
-            loadHeadlinesScreen(it)
+            router.navigateTo(Screens.HeadlinesScreen(presenter.list[it.pos].id))
         }
     }
 
@@ -56,15 +53,6 @@ class PublishersPresenter(private val mainThreadScheduler: Scheduler) : MvpPrese
                 viewState.updateList()
             }, { Timber.e(it) })
     }
-
-    private fun loadHeadlinesScreen(view: PublishersItemView) {
-        val sourcesId = presenter.list[view.pos].id
-            headlinesRepo.getNewsHeadlines(sourcesId)
-                .observeOn(mainThreadScheduler)
-                .subscribe({
-                    router.navigateTo(Screens.HeadlinesScreen(it))
-                }, { Timber.e(it) })
-        }
 
     fun backClicked(): Boolean {
         router.exit()

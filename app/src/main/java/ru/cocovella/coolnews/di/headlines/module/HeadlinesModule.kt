@@ -28,16 +28,16 @@ open class HeadlinesModule {
         return RoomNewsPublishersCache(database)
     }
 
-    @Provides
-    fun headlinesRepo(api: IDataSource, networkStatus: NetworkStatus,
-                      cache: INewsHeadlinesCache
-    ): NewsHeadlinesRepo {
-        return NewsHeadlinesRepo(api, networkStatus, cache)
-    }
-
-    //    @HeadlinesScope
-    @Provides
-    fun headlinesCache(database: Database): INewsHeadlinesCache {
-        return RoomNewsHeadlinesCache(database)
-    }
+//    @Provides
+//    fun headlinesRepo(api: IDataSource, networkStatus: NetworkStatus,
+//                      cache: INewsHeadlinesCache
+//    ): NewsHeadlinesRepo {
+//        return NewsHeadlinesRepo(api, networkStatus, cache)
+//    }
+//
+//    //    @HeadlinesScope
+//    @Provides
+//    fun headlinesCache(database: Database): INewsHeadlinesCache {
+//        return RoomNewsHeadlinesCache(database)
+//    }
 }

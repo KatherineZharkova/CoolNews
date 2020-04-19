@@ -11,8 +11,12 @@ import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesRVPresenter
 import ru.cocovella.coolnews.mvp.view.list.HeadlinesItemView
+import javax.inject.Inject
 
-class HeadlinesRVAdapter(val presenter: IHeadlinesRVPresenter, var imageLoader: IImageLoader<ImageView>) : RecyclerView.Adapter<HeadlinesRVAdapter.ViewHolder>() {
+class HeadlinesRVAdapter(val presenter: IHeadlinesRVPresenter) : RecyclerView.Adapter<HeadlinesRVAdapter.ViewHolder>() {
+
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_headline, parent, false))
@@ -25,13 +29,12 @@ class HeadlinesRVAdapter(val presenter: IHeadlinesRVPresenter, var imageLoader: 
         presenter.bindView(holder)
     }
 
-
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer, HeadlinesItemView {
         override var pos = -1
 
-        override fun setImage(urlToImage: String?) = with(containerView){ imageLoader.loadInto(urlToImage.toString(), headline_background) }
+        override fun setImage(urlToImage: String) = with(containerView){ imageLoader.loadInto(urlToImage, headline_background) }
 
-        override fun setAuthor(text: String?) = with(containerView){ author.text = text }
+        override fun setAuthor(text: String) = with(containerView){ author.text = text }
 
         override fun setPublishedAtDate(text: String)  = with(containerView){ publishedAtDate.text = text }
 

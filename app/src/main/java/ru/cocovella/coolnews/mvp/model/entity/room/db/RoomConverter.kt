@@ -24,7 +24,7 @@ class RoomConverter {
     @TypeConverter
     fun toArticle(data: String?): Article  =
         data?.let { gson.fromJson<Article>(it, object : TypeToken<Article>() {}.type) }
-            ?: Article( Source("", ""), "", "", "", "", "", "", "")
+            ?: Article( Source("", ""), "", "", "", "", "", "")
 
     @TypeConverter
     fun fromArticle(someObjects: Article): String = gson.toJson(someObjects)

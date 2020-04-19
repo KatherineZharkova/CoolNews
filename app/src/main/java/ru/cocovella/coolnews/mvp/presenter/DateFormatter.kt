@@ -14,25 +14,24 @@ class DateFormatter {
             val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
             PrettyTime(Locale(getCountry())).format(sdf.parse(dateTime))
         } catch (e: ParseException) {
-            e.printStackTrace()
-            dateTime
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'", Locale.ENGLISH)
+            PrettyTime(Locale(getCountry())).format(sdf.parse(dateTime))
         }
     }
 
     @SuppressLint("SimpleDateFormat")
     fun formatDate(dateTime: String?): String? = dateTime?.let {
         try {
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
                 .parse(dateTime)
                 ?.let {
-                    SimpleDateFormat(
-                        "E, d MMM yyyy",
-                        Locale(getCountry())
-                    ).format(it)
+                    SimpleDateFormat("E, d MMM yyyy", Locale(getCountry())).format(it)
                 }
         } catch (e: ParseException) {
-            e.printStackTrace()
-            dateTime
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'", Locale.ENGLISH)
+            .parse(dateTime)?.let{
+                SimpleDateFormat("E, d MMM yyyy", Locale(getCountry())).format(it)
+            }
         }
     }
 

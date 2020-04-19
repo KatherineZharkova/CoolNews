@@ -13,7 +13,7 @@ class RoomNewsHeadlinesCache(val database: Database) : INewsHeadlinesCache {
 
     override fun getNewsHeadlines(sourceId: String): @NonNull Single<Headlines> = Single.fromCallable {
         database.headlinesDao.findHeadlines(sourceId)?.run {
-            Headlines(sourceId, status, articlesList) }
+            Headlines(sourceId, status, totalResult, articlesList) }
             ?: throw RuntimeException("No such headline in cache")
     }.subscribeOn(Schedulers.io())
 
@@ -22,7 +22,7 @@ class RoomNewsHeadlinesCache(val database: Database) : INewsHeadlinesCache {
                 database.headlinesDao.insert(
                     (database.headlinesDao.findHeadlines(headlines.sourceId))?.apply {
                         articlesList = headlines.articles
-                    } ?: RoomHeadlines(headlines.sourceId, headlines.status, headlines.articles)
+                    } ?: RoomHeadlines(headlines.sourceId, headlines.status, headlines.totalResult, headlines.articles)
                 )
     }.subscribeOn(Schedulers.io())
 

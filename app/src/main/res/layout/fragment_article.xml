@@ -82,7 +82,7 @@
 
                     <TextView
                         android:id="@+id/appbar_title"
-                        style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
+                        style="@style/White"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
@@ -94,12 +94,14 @@
 
                     <TextView
                         android:id="@+id/appbar_subtitle"
-                        style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                        style="@style/White"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:autoLink="web"
+                        android:linksClickable="true"
                         android:singleLine="true"
                         android:textSize="12sp"
                         tools:text="Brian Hether" />
@@ -195,17 +197,13 @@
         android:id="@+id/date_behavior"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/margin_16"
         android:adjustViewBounds="true"
         android:background="@drawable/round_white"
-        android:clickable="false"
         android:padding="5dp"
         app:behavior_autoHide="true"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="right|end|bottom"
-        tools:ignore="UnusedAttribute">
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="end|bottom">
 
         <ImageView
             android:src="@drawable/ic_date"

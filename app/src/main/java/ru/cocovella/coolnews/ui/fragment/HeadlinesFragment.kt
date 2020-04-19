@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_article.*
 import kotlinx.android.synthetic.main.fragment_headlines.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
-import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesPresenter
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
@@ -27,10 +25,8 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
 
     companion object {
         private const val KEY = "headlines"
-        fun newInstance(headlines: Headlines) = HeadlinesFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(KEY, headlines)
-            }
+        fun newInstance(sourcesId: String) = HeadlinesFragment().apply {
+            arguments = Bundle().apply { putString(KEY, sourcesId) }
         }
     }
 
@@ -52,14 +48,14 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
     }
 
     @ProvidePresenter
-    fun providePresenter() = HeadlinesPresenter(AndroidSchedulers.mainThread(), arguments!![KEY] as Headlines).apply {
+    fun providePresenter() = HeadlinesPresenter(AndroidSchedulers.mainThread(), arguments?.getString(KEY).toString()).apply {
         component.inject(this)
     }
 
 
     override fun init() {
         rv_headlines.layoutManager = LinearLayoutManager(context)
-        adapter = HeadlinesRVAdapter(presenter.presenter, imageLoader).apply {
+        adapter = HeadlinesRVAdapter(presenter.presenter).apply {
             component.inject(this)
         }
         rv_headlines.adapter = adapter
