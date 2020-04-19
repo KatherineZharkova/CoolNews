@@ -5,7 +5,9 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Source (
+data class Source (
     @Expose var id: String,
     @Expose var name: String
-) : Parcelable
+) : Parcelable {
+
+}

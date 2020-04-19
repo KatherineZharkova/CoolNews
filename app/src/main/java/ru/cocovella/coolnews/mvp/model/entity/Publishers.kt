@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class NewsPublishers (
+data class Publishers(
     @Expose val status: String,
     @Expose val sources: List<Sources>
 ) : Parcelable

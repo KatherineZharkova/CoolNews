@@ -1,33 +1,31 @@
 package ru.cocovella.coolnews.mvp.presenter
 
 import io.reactivex.rxjava3.core.Scheduler
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.cocovella.coolnews.mvp.model.entity.Article
-import ru.cocovella.coolnews.mvp.model.repo.NewsArticlesRepo
+import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.repo.NewsHeadlinesRepo
-import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesListPresenter
+import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesRVPresenter
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.mvp.view.list.HeadlinesItemView
 import ru.cocovella.coolnews.navigation.Screens
 import ru.terrakok.cicerone.Router
 import timber.log.Timber
+import javax.inject.Inject
 
-class HeadlinesPresenter (
-    val mainThreadScheduler: Scheduler,
-    val router: Router,
-    val articlesRepo: NewsArticlesRepo,
-    val headlinesRepo: NewsHeadlinesRepo
-) :
+@InjectViewState
+class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val headlines: Headlines) :
     MvpPresenter<HeadlinesView>() {
 
-    class HeadlinesListPresenter : IHeadlinesListPresenter {
-        val articles = mutableListOf<Article>()
+    class HeadlinesRVPresenter : IHeadlinesRVPresenter {
+        val list = mutableListOf<Article>()
         override var itemClickListener: ((HeadlinesItemView) -> Unit)? = null
 
-        override fun getCount() = articles.size
+        override fun getCount() = list.size
 
         override fun bindView(view: HeadlinesItemView) {
-            val article = articles[view.pos]
+            val article = list[view.pos]
             with(view) {
                 setImage(article.urlToImage)
                 setAuthor(article.author)
@@ -40,47 +38,42 @@ class HeadlinesPresenter (
         }
     }
 
-    val headlinesListPresenter = HeadlinesListPresenter()
+    @Inject lateinit var headlinesRepo: NewsHeadlinesRepo
+    @Inject lateinit var router: Router
+
+    val presenter = HeadlinesRVPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadHeadlines()
-        loadArticles()
-        headlinesListPresenter.itemClickListener = { itemView ->
-            val article = headlinesListPresenter.articles[itemView.pos]
+
+        viewState.setHeader(headlines.sourceId)
+
+        loadData()
+
+        presenter.itemClickListener = {
+            val article = presenter.list[it.pos]
             router.navigateTo(Screens.ArticleScreen(article))
         }
     }
 
-    fun loadHeadlines() {
-        headlinesRepo.getHeadlines("rbc")
+    private fun loadData() {
+        headlinesRepo.getNewsHeadlines(headlines.sourceId)
             .observeOn(mainThreadScheduler)
-            .subscribe({headlines ->
-                viewState.setHeader(
-                   "Top Headlines  • " +  headlines[0].articles[0].source.name + " • " + headlines[0].totalResult)
-            }, {
-                Timber.e(it)
-            })
-    }
-
-    fun loadArticles() {
-        articlesRepo.getArticles()
-            .observeOn(mainThreadScheduler)
-            .subscribe({ repos ->
-                headlinesListPresenter.articles.clear()
-                headlinesListPresenter.articles.addAll(repos)
+            .subscribe({
+                presenter.list.clear()
+                presenter.list.addAll(it.articles)
+                viewState.setHeader("Top Headlines  • " +  it.articles[0].source.name)
                 viewState.updateList()
             }, {
                 Timber.e(it)
             })
     }
 
-
-
     fun backClicked(): Boolean {
         router.exit()
         return true
     }
+
 
 }

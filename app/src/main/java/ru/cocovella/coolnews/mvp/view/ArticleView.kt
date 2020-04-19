@@ -9,7 +9,7 @@ interface ArticleView : MvpView {
     fun init()
     fun setAppbarTitle(text:String)
     fun setAppbarSubtitle(text: String)
-    fun setImage(urlToImage:String)
+    fun setImage(urlToImage:String?)
     fun setPublishedAt(text:String)
     fun setArticleTitle(text:String)
     fun setSourceAuthorTime(text: String)

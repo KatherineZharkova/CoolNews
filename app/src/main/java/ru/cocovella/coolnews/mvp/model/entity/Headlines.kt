@@ -5,8 +5,8 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Headlines (
-    @Expose val status: String,
-    @Expose val totalResult: Int,
-    @Expose val articles: List<Article>
+data class Headlines(
+    var sourceId: String,
+    @Expose var status: String,
+    @Expose var articles: List<Article>
 ) : Parcelable

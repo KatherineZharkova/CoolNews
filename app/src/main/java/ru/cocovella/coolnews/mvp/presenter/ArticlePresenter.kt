@@ -1,15 +1,19 @@
 package ru.cocovella.coolnews.mvp.presenter
 
+import moxy.InjectViewState
 import moxy.MvpPresenter
 import ru.cocovella.coolnews.mvp.model.entity.Article
 import ru.cocovella.coolnews.mvp.view.ArticleView
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class ArticlePresenter (private val article: Article, private val router: Router) : MvpPresenter<ArticleView>() {
+@InjectViewState
+class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>() {
+
+    @Inject lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         viewState.apply {
             init()
             setAppbarTitle(article.source.name)
@@ -29,7 +33,7 @@ class ArticlePresenter (private val article: Article, private val router: Router
         viewState.setSourceAuthorTime(text)
     }
 
-    fun backClicked() : Boolean {
+    fun backClicked(): Boolean {
         router.exit()
         return true
     }

@@ -9,22 +9,28 @@ import ru.cocovella.coolnews.mvp.presenter.MainPresenter
 import ru.cocovella.coolnews.mvp.view.MainView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    val navigator = SupportAppNavigator(this, R.id.container)
+    private val navigator = SupportAppNavigator(this, R.id.container)
 
-    @InjectPresenter
-    lateinit var presenter: MainPresenter
+    @Inject lateinit var navigatorHolder: NavigatorHolder
+
+    @InjectPresenter lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        App.instance.appComponent.inject(this)
     }
 
     @ProvidePresenter
-    fun providePresenter() = MainPresenter(App.instance.router)
+    fun providePresenter() = MainPresenter().apply {
+        App.instance.appComponent.inject(this)
+    }
 
     override fun init() {
 
@@ -32,12 +38,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        App.instance.navigatorHolder.setNavigator(navigator)
+        navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.instance.navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onBackPressed() {
