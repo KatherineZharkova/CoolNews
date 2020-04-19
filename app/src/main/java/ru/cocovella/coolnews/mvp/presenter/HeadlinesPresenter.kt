@@ -26,12 +26,13 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
             val article = list[view.pos]
             with(view) {
                 setImage(article.urlToImage+"")
-                setAuthor(article.author+"")
                 setArticleTitle(article.title+"")
                 setDescription(article.description+"")
-                setSource(article.source.name+"")
-                setPublishedAtDate(DateFormatter().formatDate(article.publishedAt) ?: "")
-                setPublishedAgoTime(DateFormatter().formatDateToTime(article.publishedAt) + " • ")
+                setSource(article.author+"")
+                setPublishedAtDate(
+                    DateFormatter().formatDate(article.publishedAt) ?: "")
+                setPublishedAgoTime(
+                    DateFormatter().formatDateToTime(article.publishedAt) + " • ")
             }
         }
     }

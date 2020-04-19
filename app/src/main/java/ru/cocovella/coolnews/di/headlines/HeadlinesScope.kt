@@ -1,4 +1,4 @@
-package ru.cocovella.coolnews.di.article
+package ru.cocovella.coolnews.di.headlines
 
 import javax.inject.Scope
 

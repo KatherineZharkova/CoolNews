@@ -2,6 +2,7 @@ package ru.cocovella.coolnews.di.article.module
 
 import dagger.Module
 import dagger.Provides
+import ru.cocovella.coolnews.di.article.ArticleScope
 import ru.cocovella.coolnews.mvp.model.api.IDataSource
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
 import ru.cocovella.coolnews.mvp.model.cache.room.RoomNewsHeadlinesCache
@@ -19,7 +20,7 @@ open class ArticleModule {
         return NewsHeadlinesRepo(api, networkStatus, cache)
     }
 
-//    @HeadlinesScope
+    @ArticleScope
     @Provides
     fun headlinesCache(database: Database): INewsHeadlinesCache {
         return RoomNewsHeadlinesCache(database)

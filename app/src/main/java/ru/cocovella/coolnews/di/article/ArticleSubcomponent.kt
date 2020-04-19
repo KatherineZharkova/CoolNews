@@ -9,7 +9,7 @@ import ru.cocovella.coolnews.ui.fragment.ArticleFragment
 import ru.cocovella.coolnews.ui.fragment.HeadlinesFragment
 
 
-//@HeadlinesScope
+@ArticleScope
 @Subcomponent(
     modules = [
         ArticleModule::class

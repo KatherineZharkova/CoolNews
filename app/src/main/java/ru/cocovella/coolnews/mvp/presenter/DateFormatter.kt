@@ -1,6 +1,5 @@
 package ru.cocovella.coolnews.mvp.presenter
 
-import android.annotation.SuppressLint
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -19,7 +18,6 @@ class DateFormatter {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
     fun formatDate(dateTime: String?): String? = dateTime?.let {
         try {
             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
@@ -35,7 +33,7 @@ class DateFormatter {
         }
     }
 
-    fun getCountry(): String {
+    private fun getCountry(): String {
         val locale: Locale = Locale.getDefault()
         val country: String = java.lang.String.valueOf(locale.country)
         return country.toLowerCase(Locale.getDefault())

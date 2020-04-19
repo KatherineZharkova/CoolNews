@@ -92,19 +92,7 @@
                         android:textSize="18sp"
                         tools:text="TechCrunch" />
 
-                    <TextView
-                        android:id="@+id/appbar_subtitle"
-                        style="@style/White"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="10dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:autoLink="web"
-                        android:linksClickable="true"
-                        android:singleLine="true"
-                        android:textSize="12sp"
-                        tools:text="Brian Hether" />
+
 
                 </LinearLayout>
 
@@ -154,15 +142,26 @@
                     <TextView
                         android:id="@+id/publishedAgoTime"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@id/article_title"
                         android:layout_marginTop="10dp"
                         android:drawablePadding="10dp"
+                        tools:text="8 hours ago * Brian Heather" />
+
+                    <TextView
+                        android:id="@+id/appbar_subtitle"
+                        style="@style/Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:autoLink="web"
+                        android:linksClickable="true"
                         android:singleLine="true"
-                        tools:text="TechCrunch * Brian Heather * 8 hours ago" />
+                        android:textSize="12sp"
+                        android:layout_below="@id/publishedAgoTime"
 
+                        tools:text="https://abcnews.go.com" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

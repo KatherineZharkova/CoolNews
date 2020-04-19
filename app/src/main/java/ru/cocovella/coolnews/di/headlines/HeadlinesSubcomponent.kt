@@ -7,7 +7,7 @@ import ru.cocovella.coolnews.mvp.presenter.PublishersPresenter
 import ru.cocovella.coolnews.ui.adapter.PublishersRVAdapter
 import ru.cocovella.coolnews.ui.fragment.PublishersFragment
 
-//@PublishersScope
+@HeadlinesScope
 @Subcomponent(
     modules = [
         HeadlinesModule::class

@@ -2,4 +2,5 @@
     <string name="app_name">CoolNews</string>
     <string name="top_headlines">Top Headlines</string>
     <string name="headlines_header_text">Local Newspaper Publishers</string>
+    <string name="powered_by_newsapi_org">powered by NewsAPI.org</string>
 </resources>
