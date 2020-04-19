@@ -38,7 +38,6 @@ class  ApiModule {
     @Provides
     fun gson(): Gson {
         return GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .excludeFieldsWithoutExposeAnnotation()
             .create()
     }

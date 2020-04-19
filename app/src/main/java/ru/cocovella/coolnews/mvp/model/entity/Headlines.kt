@@ -8,10 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Headlines(
     var sourceId: String,
-    @SerializedName("status")
     @Expose var status: String,
-    @SerializedName("totalResult")
     @Expose val totalResult: Int,
-    @SerializedName("articles")
     @Expose var articles: List<Article>
 ) : Parcelable

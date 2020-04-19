@@ -7,8 +7,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Source (
-    @SerializedName("id")
     @Expose val id: String,
-    @SerializedName("name")
     @Expose val name: String
 ) : Parcelable
