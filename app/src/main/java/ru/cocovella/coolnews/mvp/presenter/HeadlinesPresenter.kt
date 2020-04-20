@@ -30,7 +30,7 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
                 setImage(article.urlToImage+"")
                 setArticleTitle(article.title+"")
                 setDescription(article.description+"")
-                setSource(article.author+"")
+                setSource(article.author ?: "")
                 setPublishedAtDate(dateFormatter.formatDate(article.publishedAt) ?: "")
                 setPublishedAgoTime(dateFormatter.formatDateToTime(article.publishedAt) + " • ")
             }

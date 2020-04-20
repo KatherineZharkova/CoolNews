@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Article(
     @Expose val source: Source,
-    @Expose val author: String,
+    @Expose val author: String?,
     @Expose val title: String,
     @Expose val description: String,
     @Expose val url: String,

@@ -29,7 +29,7 @@ class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>
     }
 
     private fun setSourceAuthorTime() {
-        val text = dateFormatter.formatDateToTime(article.publishedAt) + " • " + article.author
+        val text = dateFormatter.formatDateToTime(article.publishedAt) + " • " + (article.author ?: "")
         viewState.setSourceAuthorTime(text)
     }
 
