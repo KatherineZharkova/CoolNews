@@ -8,28 +8,24 @@ import java.util.*
 
 class DateFormatter {
 
-    fun formatDateToTime(dateTime: String?): String? = dateTime?.let {
+    fun formatDateToTime(dateTime: String?): String? = dateTime?.take(19)?.let {
         try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
-            PrettyTime(Locale(getCountry())).format(sdf.parse(dateTime))
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+            PrettyTime(Locale(getCountry())).format(sdf.parse(it))
         } catch (e: ParseException) {
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'", Locale.ENGLISH)
-            PrettyTime(Locale(getCountry())).format(sdf.parse(dateTime))
+            ""
         }
     }
 
-    fun formatDate(dateTime: String?): String? = dateTime?.let {
+    fun formatDate(dateTime: String?): String? = dateTime?.take(19)?.let {
         try {
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
-                .parse(dateTime)
-                ?.let {
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH).run {
+                parse(it)?.let {
                     SimpleDateFormat("E, d MMM yyyy", Locale(getCountry())).format(it)
                 }
-        } catch (e: ParseException) {
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'+00:00'", Locale.ENGLISH)
-            .parse(dateTime)?.let{
-                SimpleDateFormat("E, d MMM yyyy", Locale(getCountry())).format(it)
             }
+        } catch (e: ParseException) {
+            ""
         }
     }
 
