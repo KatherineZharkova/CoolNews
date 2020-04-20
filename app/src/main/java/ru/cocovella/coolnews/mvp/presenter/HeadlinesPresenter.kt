@@ -30,11 +30,20 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
                 setImage(article.urlToImage+"")
                 setArticleTitle(article.title+"")
                 setDescription(article.description+"")
-                setSource(article.author ?: "")
+                setSource(this, article.author)
                 setPublishedAtDate(dateFormatter.formatDate(article.publishedAt) ?: "")
-                setPublishedAgoTime(dateFormatter.formatDateToTime(article.publishedAt) + " • ")
+                setPublishedAgoTime(dateFormatter.formatDateToTime(article.publishedAt) ?: "")
             }
         }
+
+        private fun setSource(view: HeadlinesItemView, author: String?) {
+            if (author.isNullOrBlank()) {
+                view.setSource("")
+            } else {
+                view.setSource(" • $author")
+            }
+        }
+
     }
 
     @Inject lateinit var headlinesRepo: NewsHeadlinesRepo
@@ -62,6 +71,8 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
                 viewState.updateList()
             }, { Timber.e(it) })
     }
+
+
 
     fun backClicked(): Boolean {
         router.exit()
