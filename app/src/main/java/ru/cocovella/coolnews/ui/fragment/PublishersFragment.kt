@@ -55,11 +55,6 @@ class PublishersFragment : MvpAppCompatFragment(), PublishersView, BackButtonLis
             component.inject(this)
         }
         rv_publishers.adapter = adapter
-
-    }
-
-    override fun showStatus(status: String) {
-        TODO("Not yet implemented")
     }
 
     override fun updateList() {

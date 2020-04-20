@@ -6,7 +6,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ArticleView : MvpView {
-    fun init()
     fun setAppbarTitle(text:String)
     fun setAppbarSubtitle(text: String)
     fun setImage(urlToImage:String?)

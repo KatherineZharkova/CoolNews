@@ -16,7 +16,6 @@ class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.apply {
-            init()
             setAppbarTitle(article.source.name)
             setAppbarSubtitle(article.url)
             setImage(article.urlToImage)
@@ -29,9 +28,8 @@ class ArticlePresenter(private val article: Article) : MvpPresenter<ArticleView>
     }
 
     private fun setSourceAuthorTime() {
-        val dateText: String = dateFormatter.formatDateToTime(article.publishedAt).toString()
-        val author = article.author
-        val authorText: String = if (author.isNullOrBlank()) { "" } else { " • $author" }
+        val dateText = dateFormatter.formatDateToTime(article.publishedAt)
+        val authorText = with(article.author) { if (isNullOrBlank()) { " " } else { " • $this" } }
         viewState.setSourceAuthorTime(dateText + authorText)
     }
 

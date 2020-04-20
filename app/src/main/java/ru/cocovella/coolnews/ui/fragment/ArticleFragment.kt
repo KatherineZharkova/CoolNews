@@ -1,6 +1,5 @@
 package ru.cocovella.coolnews.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,8 +49,6 @@ class ArticleFragment : MvpAppCompatFragment(), ArticleView, BackButtonListener 
         App.instance.articleSubcomponent.inject(this)
     }
 
-    override fun init() {}
-
     override fun setAppbarTitle(text: String) {
         appbar_title.text = text
     }
@@ -76,12 +73,10 @@ class ArticleFragment : MvpAppCompatFragment(), ArticleView, BackButtonListener 
         publishedAgoTime.text = text
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun setWebView(url: String) {
         webView.apply {
             settings.apply {
                 loadsImagesAutomatically = true
-                javaScriptEnabled = true
                 domStorageEnabled = true
                 setSupportZoom(true)
                 builtInZoomControls = true
