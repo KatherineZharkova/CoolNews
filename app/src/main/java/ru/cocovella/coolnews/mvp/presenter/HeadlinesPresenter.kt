@@ -27,18 +27,23 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
         override fun bindView(view: HeadlinesItemView) {
             val article = list[view.pos]
             with(view) {
-                setImage(article.urlToImage+"")
-                setArticleTitle(article.title+"")
-                setDescription(article.description+"")
-                setSource(checkNull(article.author))
+                setImage(checkNull(article.urlToImage))
+                setArticleTitle(checkNull(article.title))
+                setDescription(checkNull(article.description))
+                setSource(checkNullAddDot(article.author))
                 setPublishedAtDate(dateFormatter.formatDate(article.publishedAt) ?: "")
                 setPublishedAgoTime(dateFormatter.formatDateToTime(article.publishedAt) ?: "")
             }
         }
 
-        private fun checkNull(text: String?) : String =
+        private fun checkNullAddDot(text: String?) : String =
             if (text.isNullOrBlank()) { "" } else { " • $text" }
+
+        private fun checkNull(text: String?) : String =
+            if (text.isNullOrBlank()) { "" } else { text }
+
         }
+
 
     @Inject lateinit var headlinesRepo: NewsHeadlinesRepo
     @Inject lateinit var router: Router

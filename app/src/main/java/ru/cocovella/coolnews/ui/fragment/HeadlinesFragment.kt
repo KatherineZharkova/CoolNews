@@ -54,11 +54,10 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
 
 
     override fun init() {
-        rv_headlines.layoutManager = LinearLayoutManager(context)
         adapter = HeadlinesRVAdapter(presenter.presenter).apply {
+            rv_headlines.adapter = this
             component.inject(this)
         }
-        rv_headlines.adapter = adapter
     }
 
     override fun updateList() {
