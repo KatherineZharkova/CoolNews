@@ -10,13 +10,13 @@ import ru.cocovella.coolnews.mvp.model.entity.room.db.Database
 
 class RoomNewsPublishersCache(val database: Database) : INewsPublishersCache {
 
-    override fun getPublishers(): Single<Publishers> = Single.fromCallable {
+    override fun get(): Single<Publishers> = Single.fromCallable {
         return@fromCallable database.publishersDao.getAll().run {
                 Publishers(status, sources)
         }
     }.subscribeOn(Schedulers.io())
 
-    override fun putPublishers(publishers: Publishers): Completable = Completable.fromAction {
+    override fun put(publishers: Publishers): Completable = Completable.fromAction {
         database.publishersDao.insert(RoomPublishers(publishers.status, publishers.sources))
     }.subscribeOn(Schedulers.io())
 

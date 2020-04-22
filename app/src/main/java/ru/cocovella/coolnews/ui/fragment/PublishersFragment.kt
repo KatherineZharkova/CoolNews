@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_publishers.*
 import moxy.MvpAppCompatFragment
@@ -23,7 +22,6 @@ import javax.inject.Inject
 class PublishersFragment : MvpAppCompatFragment(), PublishersView, BackButtonListener {
 
     companion object {
-
         fun newInstance() = PublishersFragment()
     }
 
@@ -50,16 +48,13 @@ class PublishersFragment : MvpAppCompatFragment(), PublishersView, BackButtonLis
 
 
     override fun init() {
-        rv_publishers.layoutManager = LinearLayoutManager(context)
         adapter = PublishersRVAdapter(presenter.presenter).apply {
+            rv_publishers.adapter = this
             component.inject(this)
         }
-        rv_publishers.adapter = adapter
     }
 
-    override fun updateList() {
-        adapter?.notifyDataSetChanged()
-    }
+    override fun updateList() { adapter?.notifyDataSetChanged() }
 
     override fun backClicked() = presenter.backClicked()
 }

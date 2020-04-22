@@ -18,10 +18,10 @@ class NewsPublishersRepo(
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
                 api.getNewsPublishers().flatMap {
-                    cache.putPublishers(it).toSingleDefault(it)
+                    cache.put(it).toSingleDefault(it)
                 }
             } else {
-                cache.getPublishers()
+                cache.get()
             }
         }.subscribeOn(Schedulers.io())
 

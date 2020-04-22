@@ -18,6 +18,14 @@ interface IDataSource {
         @Query("apiKey") apiKey: String = API_KEY
     ): Single<Headlines>
 
+    @GET("everything")
+    fun getNewsEverything(
+        @Query("sources") sourceId: String,
+        @Query("pageSize") pageSize: Int = 50,
+        @Query("language") language: String = "ru",
+        @Query("apiKey") apiKey: String = API_KEY
+    ): Single<Headlines>
+
     @GET("sources")
     fun getNewsPublishers(
         @Query("language") language: String = LANGUAGE,

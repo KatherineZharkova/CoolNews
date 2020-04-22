@@ -4,15 +4,15 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
+import ru.cocovella.coolnews.mvp.model.cache.INewsEverythingCache
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
-import ru.cocovella.coolnews.mvp.model.entity.room.RoomHeadlines
+import ru.cocovella.coolnews.mvp.model.entity.room.RoomEverything
 import ru.cocovella.coolnews.mvp.model.entity.room.db.Database
 
-class RoomNewsHeadlinesCache(val database: Database) : INewsHeadlinesCache {
+class RoomNewsEverythingCache(val database: Database) : INewsEverythingCache {
 
     override fun get(sourceId: String): @NonNull Single<Headlines> = Single.fromCallable {
-        database.headlinesDao.findHeadlines(sourceId)?.run {
+        database.everythingDao.findEverything(sourceId)?.run {
             Headlines(sourceId, status, totalResult, articlesList) }
             ?: run {
                 throw RuntimeException("No such headline in cache")
@@ -21,10 +21,10 @@ class RoomNewsHeadlinesCache(val database: Database) : INewsHeadlinesCache {
 
 
     override fun put(headlines: Headlines): @NonNull Completable = Completable.fromAction {
-                database.headlinesDao.insert(
-                    (database.headlinesDao.findHeadlines(headlines.sourceId))?.apply {
+                database.everythingDao.insert(
+                    (database.everythingDao.findEverything(headlines.sourceId))?.apply {
                         articlesList = headlines.articles
-                    } ?: RoomHeadlines(headlines.sourceId, headlines.status, headlines.totalResult, headlines.articles)
+                    } ?: RoomEverything(headlines.sourceId, headlines.status, headlines.totalResult, headlines.articles)
                 )
     }.subscribeOn(Schedulers.io())
 

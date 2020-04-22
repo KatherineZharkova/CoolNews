@@ -42,4 +42,5 @@ interface HeadlinesDao {
 
     @Query("SELECT * FROM RoomHeadlines WHERE sourceId = :sourceId")
     fun findHeadlines(sourceId: String): RoomHeadlines?
+
 }

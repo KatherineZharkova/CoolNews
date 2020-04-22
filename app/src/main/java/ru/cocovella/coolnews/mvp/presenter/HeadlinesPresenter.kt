@@ -66,7 +66,8 @@ class HeadlinesPresenter(private val mainThreadScheduler: Scheduler, private val
             .subscribe({
                 presenter.list.clear()
                 presenter.list.addAll(it.articles)
-                viewState.setHeader("Top Headlines  • " +  it.articles[0].source.name)
+                val header = if (it.articles.size > 10) { "Latest Headlines" } else { "Top Headlines" }
+                viewState.setHeader("$header • ${it.articles[0].source.name}")
                 viewState.updateList()
             }, { Timber.e(it) })
     }
