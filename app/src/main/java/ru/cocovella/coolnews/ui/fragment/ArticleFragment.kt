@@ -58,7 +58,9 @@ class ArticleFragment : MvpAppCompatFragment(), ArticleView, BackButtonListener 
     }
 
     override fun setImage(urlToImage: String?) {
-        imageLoader.loadInto(urlToImage.toString(), appbar_background)
+        urlToImage?.let {
+            imageLoader.loadInto(it, appbar_background)
+        } ?: appbar.setExpanded(false)
     }
 
     override fun setPublishedAt(text: String) {

@@ -8,6 +8,7 @@ import ru.cocovella.coolnews.mvp.model.cache.INewsEverythingCache
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.network.NetworkStatus
+import timber.log.Timber
 
 class NewsHeadlinesRepo(
     val api: IDataSource,
@@ -21,6 +22,9 @@ class NewsHeadlinesRepo(
             if (isOnline) {
                 api.getNewsHeadlines(sourceId).flatMap {
                     val headline = Headlines(sourceId, it.status, it.totalResult, it.articles)
+                    // todo: картинки пропали в API
+                    Timber.e("Published at = ${headline.articles[1].publishedAt}")
+                    Timber.e("URL to Image = ${headline.articles[1].urlToImage}")
                     topHeadlinesCache.put(headline).toSingleDefault(headline)
                 }
             } else {

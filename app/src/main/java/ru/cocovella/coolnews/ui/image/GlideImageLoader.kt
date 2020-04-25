@@ -10,6 +10,7 @@ import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 class GlideImageLoader : IImageLoader<ImageView> {
     override fun loadInto(url: String, container: ImageView) {
                     Glide.with(container.context)
+//                        .asBitmap()
                         .load(url)
                         .apply(RequestOptions())
                         .transition(DrawableTransitionOptions.withCrossFade())

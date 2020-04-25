@@ -32,7 +32,10 @@ class HeadlinesRVAdapter(val presenter: IHeadlinesRVPresenter) : RecyclerView.Ad
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer, HeadlinesItemView {
         override var pos = -1
 
-        override fun setImage(urlToImage: String) = with(containerView){ imageLoader.loadInto(urlToImage, headline_background) }
+        override fun setImage(urlToImage: String) = with(containerView){
+                if (urlToImage.isBlank()) { headline_background.visibility = View.GONE
+                } else { imageLoader.loadInto(urlToImage, headline_background) }
+            }
 
         override fun setAuthor(text: String) = with(containerView){ author.text = text }
 

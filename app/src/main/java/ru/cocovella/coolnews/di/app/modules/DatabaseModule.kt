@@ -13,7 +13,10 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun database(app: App): Database {
-        return Room.databaseBuilder(app, Database::class.java, Database.DB_NAME).build()
+        return Room.databaseBuilder(app, Database::class.java, Database.DB_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+
     }
 
 }
