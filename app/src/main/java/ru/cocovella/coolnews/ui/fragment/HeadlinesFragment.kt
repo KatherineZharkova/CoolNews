@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_headlines.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -17,7 +15,8 @@ import ru.cocovella.coolnews.mvp.presenter.HeadlinesPresenter
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
-import ru.cocovella.coolnews.ui.adapter.HeadlinesRVAdapter
+import ru.cocovella.coolnews.ui.adapter.MyAdapter
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -30,12 +29,9 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
         }
     }
 
-    @InjectPresenter
-    lateinit var presenter: HeadlinesPresenter
+    @InjectPresenter lateinit var presenter: HeadlinesPresenter
 
     @Inject lateinit var imageLoader: IImageLoader<ImageView>
-
-    var adapter: HeadlinesRVAdapter? = null
 
     private val component = App.instance.articleSubcomponent
 
@@ -45,28 +41,23 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         component.inject(this)
+
+        view_pager.adapter = MyAdapter(fragmentManager).apply {
+            addFragment(HeadlinesTopFragment.newInstance(arguments?.getString(KEY).toString()), "Top Headlines")
+            Timber.e("HeadlinesTopFragment.SourcesId = ${arguments?.getString(KEY).toString()}")
+            addFragment(HeadlinesEverythingFragment.newInstance(arguments?.getString(KEY).toString()), "Everything")
+        }
+        tabs.setupWithViewPager(view_pager)
     }
 
     @ProvidePresenter
-    fun providePresenter() = HeadlinesPresenter(AndroidSchedulers.mainThread(), arguments?.getString(KEY).toString()).apply {
-        component.inject(this)
-    }
+    fun providePresenter() = HeadlinesPresenter().apply { component.inject(this) }
 
+    override fun init() {}
 
-    override fun init() {
-        adapter = HeadlinesRVAdapter(presenter.presenter).apply {
-            rv_headlines.adapter = this
-            component.inject(this)
-        }
-    }
+    override fun updateList() {}
 
-    override fun updateList() {
-        adapter?.notifyDataSetChanged()
-    }
-
-    override fun setHeader(text: String) {
-        headlines_header.text = text
-    }
+    override fun setHeader(text: String) {}
 
     override fun backClicked() = presenter.backClicked()
 }

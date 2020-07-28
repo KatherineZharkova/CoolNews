@@ -1,8 +1,9 @@
-package ru.cocovella.coolnews.di.article.module
+package ru.cocovella.coolnews.di.article
 
 import dagger.Module
 import dagger.Provides
-import ru.cocovella.coolnews.di.article.ArticleScope
+import ru.cocovella.coolnews.di.article.everything.EverythingArticlesScope
+import ru.cocovella.coolnews.di.article.top.TopArticlesScope
 import ru.cocovella.coolnews.mvp.model.api.IDataSource
 import ru.cocovella.coolnews.mvp.model.cache.INewsEverythingCache
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
@@ -18,21 +19,20 @@ open class ArticleModule {
     @Provides
     fun headlinesRepo(api: IDataSource, networkStatus: NetworkStatus,
                       headlinesCache: INewsHeadlinesCache, everythingCache: INewsEverythingCache
-    ): NewsHeadlinesRepo {
-        return NewsHeadlinesRepo(api, networkStatus, headlinesCache, everythingCache)
+    ) : NewsHeadlinesRepo = NewsHeadlinesRepo(api, networkStatus, headlinesCache, everythingCache)
+
+
+//    @EverythingArticlesScope
+    @Provides
+    fun everythingCache(database: Database): INewsEverythingCache {
+        return RoomNewsEverythingCache(database)
     }
 
-    @ArticleScope
+//    @TopArticlesScope
     @Provides
     fun headlinesCache(database: Database): INewsHeadlinesCache {
         return RoomNewsHeadlinesCache(database)
     }
 
-
-    @ArticleScope
-    @Provides
-    fun everythingCache(database: Database): INewsEverythingCache {
-        return RoomNewsEverythingCache(database)
-    }
 
 }

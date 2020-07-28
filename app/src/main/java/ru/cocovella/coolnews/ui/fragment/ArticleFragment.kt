@@ -54,7 +54,7 @@ class ArticleFragment : MvpAppCompatFragment(), ArticleView, BackButtonListener 
     }
 
     override fun setAppbarSubtitle(text: String) {
-        appbar_subtitle.text = text
+        appbarUrl.text = text
     }
 
     override fun setImage(urlToImage: String?) {

@@ -2,34 +2,56 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
     </style>
     
-    <style name="Title">
+    <style name="FragmentTitle">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorTextTitle</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
     </style>
 
-    <style name="Black">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorTextTitle</item>
-        <item name="android:fontFamily"> sans-serif</item>
+    <style name="Url">
+<!--        <item name="textColorSearchUrl">#000000</item>-->
+        <item name="android:autoUrlDetect">true</item>
+        <item name="android:autoLink">web</item>
+        <item name="android:linksClickable">true</item>
     </style>
+
+    <style name="FragmentText" parent="Url">
+        <item name="android:textColor">@color/colorOnBackground</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ItemTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorOnPrimaryTitle</item>
+    </style>
+
+    <style name="ItemText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnPrimaryText</item>
+    </style>
+
+
 
     <style name="Gray">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorTextSubtitle</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorOnPrimaryText</item>
     </style>
 
     <style name="White">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorOnBackground</item>
     </style>
 
     <style name="MyAppBarLayoutTheme" parent="@style/ThemeOverlay.AppCompat.Dark">

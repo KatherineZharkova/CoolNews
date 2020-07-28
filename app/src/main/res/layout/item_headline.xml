@@ -32,12 +32,11 @@
 
         <TextView
             android:id="@+id/author"
-            style="@style/White"
+            style="@style/FragmentText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/margin_16"
             android:paddingVertical="@dimen/margin_8"
-            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="@id/shadow_bottom"
             app:layout_constraintEnd_toStartOf="@id/layoutDate"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,11 +69,11 @@
 
             <TextView
                 android:id="@+id/article_title"
-                style="@style/Title"
+                style="@style/ItemTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_8"
-                android:textColor="@color/colorTextTitle"
+                android:textColor="@color/colorOnPrimaryTitle"
                 app:layout_constraintTop_toBottomOf="@id/shadow_bottom"
                 tools:text="Apple Watch Series 4 up close and hands-on" />
 
@@ -108,7 +107,7 @@
 
                 <TextView
                     android:id="@+id/source"
-                    style="@style/Black"
+                    style="@style/ItemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="TechCrunch" />

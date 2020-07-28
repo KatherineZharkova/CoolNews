@@ -13,7 +13,7 @@ import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesRVPresenter
 import ru.cocovella.coolnews.mvp.view.list.HeadlinesItemView
 import javax.inject.Inject
 
-class HeadlinesRVAdapter(val presenter: IHeadlinesRVPresenter) : RecyclerView.Adapter<HeadlinesRVAdapter.ViewHolder>() {
+class TopRVAdapter(val presenter: IHeadlinesRVPresenter) : RecyclerView.Adapter<TopRVAdapter.ViewHolder>() {
 
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>

@@ -3,4 +3,7 @@
     <string name="top_headlines">Top Headlines</string>
     <string name="headlines_header_text">Local Newspaper Publishers</string>
     <string name="powered_by_newsapi_org">powered by NewsAPI.org</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

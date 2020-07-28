@@ -22,7 +22,6 @@ class NewsHeadlinesRepo(
             if (isOnline) {
                 api.getNewsHeadlines(sourceId).flatMap {
                     val headline = Headlines(sourceId, it.status, it.totalResult, it.articles)
-                    // todo: картинки пропали в API
                     Timber.e("Published at = ${headline.articles[1].publishedAt}")
                     Timber.e("URL to Image = ${headline.articles[1].urlToImage}")
                     topHeadlinesCache.put(headline).toSingleDefault(headline)

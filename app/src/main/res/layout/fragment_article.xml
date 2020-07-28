@@ -76,20 +76,21 @@
                 <LinearLayout
                     android:id="@+id/appbar_header"
                     android:clickable="false"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginVertical="@dimen/margin_8"
                     android:layout_width="wrap_content"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/appbar_title"
-                        style="@style/White"
+                        style="@style/FragmentTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textSize="18sp"
                         tools:text="TechCrunch" />
 
                 </LinearLayout>
@@ -167,8 +168,7 @@
                         android:id="@+id/article_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:textColor="@color/colorTextTitle"
+                        style="@style/ItemTitle"
                         android:textSize="19sp"
                         android:textStyle="bold"
                         tools:text="Apple Watch Series 4 up close and hands-on" />
@@ -183,8 +183,8 @@
                         tools:text="8 hours ago * Brian Heather" />
 
                     <TextView
-                        android:id="@+id/appbar_subtitle"
-                        style="@style/Gray"
+                        android:id="@+id/appbarUrl"
+                        style="@style/Url"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"

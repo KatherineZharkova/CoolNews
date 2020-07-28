@@ -6,6 +6,8 @@ import ru.cocovella.coolnews.di.app.DaggerAppComponent
 import ru.cocovella.coolnews.di.app.modules.AppModule
 import ru.cocovella.coolnews.di.headlines.HeadlinesSubcomponent
 import ru.cocovella.coolnews.di.article.ArticleSubcomponent
+import ru.cocovella.coolnews.di.article.everything.EverythingArticlesSubcomponent
+import ru.cocovella.coolnews.di.article.top.TopArticlesSubcomponent
 import timber.log.Timber
 
 class App : Application() {
@@ -19,13 +21,24 @@ class App : Application() {
 
     private var tHeadlinesSubcomponent: HeadlinesSubcomponent? = null
 
+    private var tArticleSubcomponent: ArticleSubcomponent? = null
+
+
     val headlinesSubcomponent: HeadlinesSubcomponent
         get() = appComponent.headlinesSubcomponent().also {
             tHeadlinesSubcomponent = it
         }
 
     val articleSubcomponent: ArticleSubcomponent
-        get() = tHeadlinesSubcomponent!!.articleSubcomponent()
+        get() = tHeadlinesSubcomponent!!.articleSubcomponent().also {
+            tArticleSubcomponent = it
+        }
+
+    val topArticlesSubcomponent: TopArticlesSubcomponent
+        get() = tArticleSubcomponent!!.topArticleSubcomponent()
+
+    val everythingArticlesSubcomponent: EverythingArticlesSubcomponent
+        get() = tArticleSubcomponent!!.everythingArticleSubcomponent()
 
 
     override fun onCreate() {
