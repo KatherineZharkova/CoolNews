@@ -13,6 +13,7 @@ import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesEverythingPresenter
+import ru.cocovella.coolnews.mvp.view.HeadlinesEverythingView
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
@@ -20,7 +21,7 @@ import ru.cocovella.coolnews.ui.adapter.EverythingRVAdapter
 import timber.log.Timber
 import javax.inject.Inject
 
-class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListener {
+class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesEverythingView, BackButtonListener {
 
     companion object {
         private const val KEY = "everything"

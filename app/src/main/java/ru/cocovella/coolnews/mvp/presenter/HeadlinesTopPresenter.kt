@@ -6,6 +6,7 @@ import moxy.MvpPresenter
 import ru.cocovella.coolnews.mvp.model.entity.Article
 import ru.cocovella.coolnews.mvp.model.repo.NewsHeadlinesRepo
 import ru.cocovella.coolnews.mvp.presenter.list.IHeadlinesRVPresenter
+import ru.cocovella.coolnews.mvp.view.HeadlinesTopView
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.mvp.view.list.HeadlinesItemView
 import ru.cocovella.coolnews.navigation.Screens
@@ -14,7 +15,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
-class HeadlinesTopPresenter(private val mainThreadScheduler: Scheduler, private val sourcesId: String) : MvpPresenter<HeadlinesView>() {
+class HeadlinesTopPresenter(private val mainThreadScheduler: Scheduler, private val sourcesId: String) : MvpPresenter<HeadlinesTopView>() {
 
     class HeadlinesTopRVPresenter : IHeadlinesRVPresenter {
         private val dateFormatter = DateFormatter()

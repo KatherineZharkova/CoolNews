@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndStrategy::class)
-interface HeadlinesView : MvpView {
+interface HeadlinesTopView : MvpView {
     fun init()
     fun setHeader(text: String)
     fun updateList()

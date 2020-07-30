@@ -42,9 +42,8 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
         super.onViewCreated(view, savedInstanceState)
         component.inject(this)
 
-        view_pager.adapter = MyAdapter(fragmentManager).apply {
+        view_pager.adapter = MyAdapter(childFragmentManager).apply {
             addFragment(HeadlinesTopFragment.newInstance(arguments?.getString(KEY).toString()), "Top Headlines")
-            Timber.e("HeadlinesTopFragment.SourcesId = ${arguments?.getString(KEY).toString()}")
             addFragment(HeadlinesEverythingFragment.newInstance(arguments?.getString(KEY).toString()), "Everything")
         }
         tabs.setupWithViewPager(view_pager)
@@ -59,5 +58,7 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
 
     override fun setHeader(text: String) {}
 
-    override fun backClicked() = presenter.backClicked()
+    override fun backClicked(): Boolean {
+        return presenter.backClicked()
+    }
 }
