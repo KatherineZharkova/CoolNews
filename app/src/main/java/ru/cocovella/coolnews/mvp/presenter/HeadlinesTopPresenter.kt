@@ -54,8 +54,6 @@ class HeadlinesTopPresenter(private val mainThreadScheduler: Scheduler, private 
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-        Timber.e("HeadlinesTopPresenter.SourcesId = $sourcesId")
-
 
         presenter.itemClickListener = {
             val article = presenter.list[it.pos]

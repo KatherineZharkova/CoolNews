@@ -50,8 +50,6 @@ class HeadlinesTopFragment : MvpAppCompatFragment(), HeadlinesTopView, BackButto
 
     @ProvidePresenter
     fun providePresenter() = HeadlinesTopPresenter(AndroidSchedulers.mainThread(), arguments?.getString(KEY).toString()).apply {
-        //todo : не запускается почему-то презентер при повторном вызове фрагмента
-        Timber.e("HeadlinesTopPresenter created $this")
         component.inject(this)
     }
 
