@@ -10,8 +10,6 @@ import ru.cocovella.coolnews.ui.image.GlideImageLoader
 class ImageModule {
 
     @Provides
-    fun imageLoader(): IImageLoader<ImageView> {
-        return GlideImageLoader()
-    }
+    fun imageLoader(): IImageLoader<ImageView> = GlideImageLoader()
 
 }

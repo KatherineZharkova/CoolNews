@@ -8,11 +8,7 @@ import ru.cocovella.coolnews.ui.adapter.PublishersRVAdapter
 import ru.cocovella.coolnews.ui.fragment.PublishersFragment
 
 @HeadlinesScope
-@Subcomponent(
-    modules = [
-        HeadlinesModule::class
-    ]
-)
+@Subcomponent(modules = [HeadlinesModule::class])
 interface HeadlinesSubcomponent {
     fun articleSubcomponent(): ArticleSubcomponent
 

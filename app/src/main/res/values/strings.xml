@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">CoolNews</string>
-    <string name="top_headlines">Top Headlines</string>
     <string name="headlines_header_text">Local Newspaper Publishers</string>
-    <string name="powered_by_newsapi_org">powered by NewsAPI.org</string>
+    <string name="error_empty_headlines_cache">No such headline in cache</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--region API Request Settings-->
+    <string name="powered_by_news_api_org">powered by NewsAPI.org</string>
+    <string name="source_api_url">https://newsapi.org/v2/</string>
+    <string name="api_key">520802e1bb5b4ac1b94aa5927bcf1b00</string>
+    <string name="language">ru</string>
+    <integer name="page_size">50</integer>
+
+
+    <!--endregion-->
+
 </resources>

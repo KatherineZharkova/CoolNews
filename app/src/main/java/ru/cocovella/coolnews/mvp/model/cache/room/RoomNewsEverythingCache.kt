@@ -1,9 +1,11 @@
 package ru.cocovella.coolnews.mvp.model.cache.room
 
+import android.content.res.Resources
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.model.cache.INewsEverythingCache
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.entity.room.RoomEverything
@@ -15,7 +17,7 @@ class RoomNewsEverythingCache(val database: Database) : INewsEverythingCache {
         database.everythingDao.findEverything(sourceId)?.run {
             Headlines(sourceId, status, totalResult, articlesList) }
             ?: run {
-                throw RuntimeException("No such headline in cache")
+                throw RuntimeException(Resources.getSystem().getString(R.string.error_empty_headlines_cache))
             }
     }.subscribeOn(Schedulers.io())
 

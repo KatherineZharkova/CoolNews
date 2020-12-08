@@ -13,7 +13,7 @@ import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesPresenter
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
-import ru.cocovella.coolnews.ui.adapter.MyAdapter
+import ru.cocovella.coolnews.ui.adapter.TabsAdapter
 
 
 class HeadlinesFragment : MvpAppCompatFragment(), MvpView, BackButtonListener {
@@ -36,7 +36,7 @@ class HeadlinesFragment : MvpAppCompatFragment(), MvpView, BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         component.inject(this)
 
-        view_pager.adapter = MyAdapter(childFragmentManager).apply {
+        view_pager.adapter = TabsAdapter(childFragmentManager).apply {
             addFragment(HeadlinesTopFragment.newInstance(arguments?.getString(KEY).toString()), "Top Headlines")
             addFragment(HeadlinesEverythingFragment.newInstance(arguments?.getString(KEY).toString()), "Everything")
         }
