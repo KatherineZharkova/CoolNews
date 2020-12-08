@@ -13,15 +13,13 @@ import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesEverythingPresenter
-import ru.cocovella.coolnews.mvp.view.HeadlinesEverythingView
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
 import ru.cocovella.coolnews.ui.adapter.EverythingRVAdapter
-import timber.log.Timber
 import javax.inject.Inject
 
-class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesEverythingView, BackButtonListener {
+class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListener {
 
     companion object {
         private const val KEY = "everything"
@@ -50,10 +48,8 @@ class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesEverythingV
 
     @ProvidePresenter
     fun providePresenter() = HeadlinesEverythingPresenter(AndroidSchedulers.mainThread(), arguments?.getString(KEY).toString()).apply {
-        Timber.e("HeadlinesEverythingPresenter created $this")
         component.inject(this)
     }
-
 
     override fun init() {
         adapter = EverythingRVAdapter(presenter.presenter).apply {
@@ -64,10 +60,6 @@ class HeadlinesEverythingFragment : MvpAppCompatFragment(), HeadlinesEverythingV
 
     override fun updateList() {
         adapter?.notifyDataSetChanged()
-    }
-
-    override fun setHeader(text: String) {
-
     }
 
     override fun backClicked() = presenter.backClicked()
