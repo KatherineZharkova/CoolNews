@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_16"
                 android:layout_marginBottom="@dimen/margin_8"
-                android:text="@string/powered_by_newsapi_org" />
+                android:text="@string/powered_by_news_api_org" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_publishers"

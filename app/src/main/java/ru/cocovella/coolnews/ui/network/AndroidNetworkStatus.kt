@@ -40,8 +40,6 @@ class AndroidNetworkStatus(context: Context) : NetworkStatus {
         })
     }
 
-    override fun isOnline(): @NonNull BehaviorSubject<Boolean> = statusSubject
-
     override fun isOnlineSingle(): @NonNull Single<Boolean> = statusSubject
         .timeout(NETWORK_CHECK_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
         .onErrorReturnItem(false)

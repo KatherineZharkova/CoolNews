@@ -2,12 +2,12 @@ package ru.cocovella.coolnews.mvp.presenter
 
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import ru.cocovella.coolnews.mvp.view.HeadlinesView
+import moxy.MvpView
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class HeadlinesPresenter : MvpPresenter<HeadlinesView>() {
+class HeadlinesPresenter : MvpPresenter<MvpView>() {
 
     @Inject
     lateinit var router: Router

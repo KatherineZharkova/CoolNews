@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.fragment_headlines.*
 import moxy.MvpAppCompatFragment
+import moxy.MvpView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
-import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesPresenter
-import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
-import ru.cocovella.coolnews.ui.adapter.MyAdapter
-import timber.log.Timber
-import javax.inject.Inject
+import ru.cocovella.coolnews.ui.adapter.TabsAdapter
 
 
-class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListener {
+class HeadlinesFragment : MvpAppCompatFragment(), MvpView, BackButtonListener {
 
     companion object {
         private const val KEY = "headlines"
@@ -31,8 +27,6 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
 
     @InjectPresenter lateinit var presenter: HeadlinesPresenter
 
-    @Inject lateinit var imageLoader: IImageLoader<ImageView>
-
     private val component = App.instance.articleSubcomponent
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -42,7 +36,7 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
         super.onViewCreated(view, savedInstanceState)
         component.inject(this)
 
-        view_pager.adapter = MyAdapter(childFragmentManager).apply {
+        view_pager.adapter = TabsAdapter(childFragmentManager).apply {
             addFragment(HeadlinesTopFragment.newInstance(arguments?.getString(KEY).toString()), "Top Headlines")
             addFragment(HeadlinesEverythingFragment.newInstance(arguments?.getString(KEY).toString()), "Everything")
         }
@@ -51,12 +45,6 @@ class HeadlinesFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListe
 
     @ProvidePresenter
     fun providePresenter() = HeadlinesPresenter().apply { component.inject(this) }
-
-    override fun init() {}
-
-    override fun updateList() {}
-
-    override fun setHeader(text: String) {}
 
     override fun backClicked(): Boolean {
         return presenter.backClicked()

@@ -8,8 +8,6 @@ import ru.cocovella.coolnews.ui.App
 class AppModule(val app: App) {
 
     @Provides
-    fun app(): App {
-        return app
-    }
+    fun app(): App = app
 
 }

@@ -8,9 +8,14 @@ import java.util.*
 
 class DateFormatter {
 
+    companion object {
+        const val PRETTY_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
+        const val SIMPLE_DATE_PATTERN = "E, d MMM yyyy"
+    }
+
     fun formatDateToTime(dateTime: String?): String? = dateTime?.take(19)?.let {
         try {
-            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+            val sdf = SimpleDateFormat(PRETTY_TIME_PATTERN, Locale.ENGLISH)
             PrettyTime(Locale(getCountry())).format(sdf.parse(it))
         } catch (e: ParseException) {
             ""
@@ -19,9 +24,9 @@ class DateFormatter {
 
     fun formatDate(dateTime: String?): String? = dateTime?.take(19)?.let {
         try {
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH).run {
+            SimpleDateFormat(PRETTY_TIME_PATTERN, Locale.ENGLISH).run {
                 parse(it)?.let {
-                    SimpleDateFormat("E, d MMM yyyy", Locale(getCountry())).format(it)
+                    SimpleDateFormat(SIMPLE_DATE_PATTERN, Locale(getCountry())).format(it)
                 }
             }
         } catch (e: ParseException) {

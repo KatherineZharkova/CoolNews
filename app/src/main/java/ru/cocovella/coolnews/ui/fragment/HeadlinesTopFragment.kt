@@ -13,15 +13,13 @@ import moxy.presenter.ProvidePresenter
 import ru.cocovella.coolnews.R
 import ru.cocovella.coolnews.mvp.model.image.IImageLoader
 import ru.cocovella.coolnews.mvp.presenter.HeadlinesTopPresenter
-import ru.cocovella.coolnews.mvp.view.HeadlinesTopView
 import ru.cocovella.coolnews.mvp.view.HeadlinesView
 import ru.cocovella.coolnews.ui.App
 import ru.cocovella.coolnews.ui.BackButtonListener
 import ru.cocovella.coolnews.ui.adapter.TopRVAdapter
-import timber.log.Timber
 import javax.inject.Inject
 
-class HeadlinesTopFragment : MvpAppCompatFragment(), HeadlinesTopView, BackButtonListener {
+class HeadlinesTopFragment : MvpAppCompatFragment(), HeadlinesView, BackButtonListener {
 
     companion object {
         private const val KEY = "top"
@@ -53,7 +51,6 @@ class HeadlinesTopFragment : MvpAppCompatFragment(), HeadlinesTopView, BackButto
         component.inject(this)
     }
 
-
     override fun init() {
         adapter = TopRVAdapter(presenter.presenter).apply {
             rv_headlines.adapter = this
@@ -63,10 +60,6 @@ class HeadlinesTopFragment : MvpAppCompatFragment(), HeadlinesTopView, BackButto
 
     override fun updateList() {
         adapter?.notifyDataSetChanged()
-    }
-
-    override fun setHeader(text: String) {
-
     }
 
     override fun backClicked(): Boolean {
