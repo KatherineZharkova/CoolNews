@@ -8,7 +8,6 @@ import ru.cocovella.coolnews.mvp.model.cache.INewsEverythingCache
 import ru.cocovella.coolnews.mvp.model.cache.INewsHeadlinesCache
 import ru.cocovella.coolnews.mvp.model.entity.Headlines
 import ru.cocovella.coolnews.mvp.model.network.NetworkStatus
-import timber.log.Timber
 
 class NewsHeadlinesRepo(
     val api: IDataSource,
